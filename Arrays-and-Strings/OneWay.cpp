@@ -19,14 +19,14 @@ bool oneEditReplace(const string &str1, const string &str2) {
 bool oneEditInsert(const string &str1, const string &str2) {  
 	int changes = 0;
 	int len = str1.length();
-	int i, j;
+	int i, j;    // i iterates through str1 and j iterates through str2
 	for(i=0; i<len; i++) {
 		if (str1[i] != str2[j]) {
-			i--;
-			j++;
+			i--;    //here to make that i doesn't move forward
 			changes++;
 			if (changes >= 2) return false;
 		}
+		j++;
 	}
 	return true;
 }
@@ -35,8 +35,8 @@ bool oneEditAway(const string &str1, const string &str2) {
 	int l1 = str1.length();
 	int l2 = str2.length();
 	if (l1 == l2) return oneEditReplace(str1, str2);
-	else if (l1 == l2 - 1) return oneEditInsert(str1, str2);
-	else if (l2 == l1 - 1) return oneEditInsert(str2, str1);
+	else if (l1 == l2 - 1) return oneEditInsert(str1, str2);   
+	else if (l2 == l1 - 1) return oneEditInsert(str2, str1);    //deletion is the reverse of insertion
 	else return false;
 }
 
@@ -45,27 +45,32 @@ int main() {
 	string s1 = "pale";
 	string s2 = "ple";
 	cout << "whether " << s2 << " can be obtained via one edit by " 
-	<< s1 << ": " << endl;
+	<< s1 << ": " << oneEditAway(s1,s2) << endl;
 
-	// s1 = "pales";
-	// s2 = "pale";
-	// cout << "whether " << s2 << " can be obtained via one edit by " 
-	// << s1 << ": " << oneEditAway(s1,s2) << endl;
+	s1 = "pales";
+	s2 = "pale";
+	cout << "whether " << s2 << " can be obtained via one edit by " 
+	<< s1 << ": " << oneEditAway(s1,s2) << endl;
 
-	// s1 = "pale";
-	// s2 = "bale";
-	// cout << "whether " << s2 << " can be obtained via one edit by " 
-	// << s1 << ": " << oneEditAway(s1,s2) << endl;
+	s1 = "pale";
+	s2 = "bale";
+	cout << "whether " << s2 << " can be obtained via one edit by " 
+	<< s1 << ": " << oneEditAway(s1,s2) << endl;
 
-	// s1 = "pale";
-	// s2 = "bake";
-	// cout << "whether " << s2 << " can be obtained via one edit by " 
-	// << s1 << ": " << oneEditAway(s1,s2) << endl;
+	s1 = "pale";
+	s2 = "bake";
+	cout << "whether " << s2 << " can be obtained via one edit by " 
+	<< s1 << ": " << oneEditAway(s1,s2) << endl;
 
-	// s1 = "pale";
-	// s2 = "palesa";
-	// cout << "whether " << s2 << " can be obtained via one edit by " 
-	// << s1 << ": " << oneEditAway(s1,s2) << endl;
+	s1 = "pale";
+	s2 = "palesa";
+	cout << "whether " << s2 << " can be obtained via one edit by " 
+	<< s1 << ": " << oneEditAway(s1,s2) << endl;
+
+	s1 = "pale";
+	s2 = "psalk";
+	cout << "whether " << s2 << " can be obtained via one edit by " 
+	<< s1 << ": " << oneEditAway(s1,s2) << endl;
 
 	return 0;		
 }
